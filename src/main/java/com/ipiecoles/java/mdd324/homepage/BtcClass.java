@@ -2,11 +2,11 @@ package com.ipiecoles.java.mdd324.homepage;
 
 import java.util.HashMap;
 
-public class BTCClass {
+public class BtcClass {
     private HashMap<String, Double> currenciesEquivalent;
     private Double btcAmount;
 
-    public BTCClass(HashMap<String, Double> currenciesEquivalent, Double btcAmount) {
+    public BtcClass(HashMap<String, Double> currenciesEquivalent, Double btcAmount) {
         this.currenciesEquivalent = currenciesEquivalent;
         this.btcAmount = btcAmount;
     }
