@@ -9,15 +9,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LambdaApp implements RequestHandler<BtcParameterClass, GatewayResponse> {
+public class LambdaApp implements RequestHandler<Map<String, Object>, GatewayResponse> {
 
     @Override
-    public GatewayResponse handleRequest(BtcParameterClass btcParameter, Context context) {
+    public GatewayResponse handleRequest(Map<String, Object> input, Context context) {
 
         BtcClass btcClass = null;
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("Access-Control-Allow-Origin", "https://pjvilloud.github.io");
+        Genson genson = new GensonBuilder().useRuntimeType(true).create();
+
+        BtcParameterClass btcParameter = genson.deserialize((String)input.get("body"), BtcParameterClass.class);
+
         try {
             btcClass = BitcoinService.getBtcCourse(btcParameter);
         } catch (IOException e) {
@@ -28,16 +32,13 @@ public class LambdaApp implements RequestHandler<BtcParameterClass, GatewayRespo
             );
         }
 
-        Genson genson = new GensonBuilder().useRuntimeType(true).create();
         String jsonOutput = genson.serialize(btcClass);
 
-        GatewayResponse gatewayResponse = new GatewayResponse(
+        return new GatewayResponse(
                 jsonOutput,
                 headers,
                 200
         );
-
-        return gatewayResponse;
 
     }
 }

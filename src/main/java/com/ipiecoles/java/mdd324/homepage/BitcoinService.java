@@ -12,6 +12,8 @@ public class BitcoinService {
 
     public static BtcClass getBtcCourse(BtcParameterClass btcParameter) throws IOException {
 
+        System.out.println(btcParameter);
+
         String bitcoinCourseJson = Utils.getPageContents("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=" + btcParameter.getCurrencyList());
         Genson genson = new GensonBuilder().useRuntimeType(true).create();
 

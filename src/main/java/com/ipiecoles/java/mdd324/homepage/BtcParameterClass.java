@@ -10,6 +10,9 @@ public class BtcParameterClass {
         this.bitcoinAmount = bitcoinAmount;
     }
 
+    public BtcParameterClass() {
+    }
+
     public String getCurrencyList() {
         return currencyList;
     }
@@ -26,4 +29,11 @@ public class BtcParameterClass {
         this.bitcoinAmount = bitcoinAmount;
     }
 
+    @Override
+    public String toString() {
+        return "BtcParameterClass{" +
+                "currencyList='" + currencyList + '\'' +
+                ", bitcoinAmount=" + bitcoinAmount +
+                '}';
+    }
 }
